@@ -62,4 +62,5 @@ def generar_informe(data, tickers, weights):
     # Guardar documento
     doc_path = 'informe_analisis_inversion.docx'
     doc.save(doc_path)
-    print(f"Informe generado y guardado en {doc_path}")
+    file_path = os.path.abspath(doc_path)
+    print(f"El informe de análisis ha sido guardado como '{doc_path}' en '{file_path}'")

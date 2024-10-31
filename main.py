@@ -3,6 +3,7 @@ import downloader
 import analyse_data
 import calculate_weight
 from to_generate_word import generar_informe
+from to_generate_excel import generar_excel
 from prettytable.colortable import ColorTable, Themes
 import pandas as pd
 
@@ -59,7 +60,7 @@ def main():
                   1) Ver estadísticas descriptivas.
                   2) Generar gráficos.
                   3) Calcular peso óptimo.
-                  4) Generar informe en Word (Encuentra el archivo en la carpeta de trabajo).
+                  4) Generar informe en documento.
                   5) Salir\n """)
             try:
                 opc = int(input("Ingresar opción: "))
@@ -106,10 +107,22 @@ def main():
                     print(f"Error al calcular el peso óptimo: {e}")
 
             elif opc == 4:
-                try:
-                    generar_informe(data, tickers, calculate_weight.calculate_weight(mu = calculate_weight.calculate_mu_sigma(data, tickers)[0], sigma=calculate_weight.calculate_mu_sigma(data, tickers)[1]))
-                except Exception as e:
-                    print(f"Error al generar el informe: {e}")
+
+                print("""Opciones:
+                      1) Generar informe en un archivo word.
+                      2) Generar excel con los datos obtenidos."""
+                      )
+                opc = int(input("Ingresar opción: "))
+                if opc == 1:
+                    try:
+                        generar_informe(data, tickers, calculate_weight.calculate_weight(mu = calculate_weight.calculate_mu_sigma(data, tickers)[0], sigma=calculate_weight.calculate_mu_sigma(data, tickers)[1]))
+                    except Exception as e:
+                        print(f"Error al generar el informe: {e}")
+                elif opc == 2:
+                    try:
+                        generar_excel(data)
+                    except Exception as e:
+                        print(f"Error al generar el excel: {e}")
 
             elif opc == 5:
                 fin = True
