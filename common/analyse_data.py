@@ -1,10 +1,8 @@
-# analyse_data.py
 from seaborn import set, lineplot, boxplot
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Calcular rendimientos diarios
 def add_performance(data, tickers):
     for ticker in tickers:
         data[f'R{ticker}'] = np.log(data[ticker] / data[ticker].shift(1))

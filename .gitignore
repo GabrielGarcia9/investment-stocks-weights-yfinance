@@ -2,5 +2,6 @@
 probando.ipynb
 __pycache__
 .ipynb_checkpoints
+.pytest_cache
 informe_analisis_inversion.docx
 data_download.xlsx
