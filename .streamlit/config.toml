@@ -1,0 +1,6 @@
+[theme]
+base="light"                # Define si el tema es claro o oscuro
+primaryColor="#1E90FF"       # Color primario azulado
+backgroundColor="#FFFFFF"    # Color de fondo blanco
+secondaryBackgroundColor="#F5F5F5" # Color de fondo secundario gris ligero 
+textColor="#000000"          # Color del texto negro

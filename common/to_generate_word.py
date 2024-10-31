@@ -2,9 +2,10 @@ import os
 import matplotlib.pyplot as plt
 from docx import Document
 from docx.shared import Inches
+from io import BytesIO
 from .analyse_data import descriptive, plot_line_series, plot_box_plot
 
-def generar_informe(data, tickers, weights):
+def generar_informe(data, tickers, weights, output=None):
     doc = Document()
     doc.add_heading('Informe de Análisis de Inversión', level=1)
     doc.add_paragraph("Este informe contiene un análisis de los pesos óptimos del portafolio, "
@@ -30,14 +31,14 @@ def generar_informe(data, tickers, weights):
     fig1_path = "temp_plot_line_series.png"
     plot_line_series(data, tickers)
     plt.savefig(fig1_path, format='png', bbox_inches='tight')
-    plt.close()  
+    plt.close()
     doc.add_paragraph("Gráfico de Series Temporales:")
     doc.add_picture(fig1_path, width=Inches(6))
 
     fig2_path = "temp_plot_box_plot.png"
     plot_box_plot(data, tickers)
     plt.savefig(fig2_path, format='png', bbox_inches='tight')
-    plt.close()  
+    plt.close()
     doc.add_paragraph("Gráfico de Box Plot:")
     doc.add_picture(fig2_path, width=Inches(6))
 
@@ -50,7 +51,10 @@ def generar_informe(data, tickers, weights):
     if os.path.exists(fig2_path):
         os.remove(fig2_path)
 
-    doc_path = 'informe_analisis_inversion.docx'
-    doc.save(doc_path)
-    file_path = os.path.abspath(doc_path)
-    print(f"El informe de análisis ha sido guardado como '{doc_path}' en '{file_path}'")
+    if output:
+        doc.save(output)  
+    else:
+        doc_path = 'informe_analisis_inversion.docx'
+        doc.save(doc_path)
+        file_path = os.path.abspath(doc_path)
+        print(f"El informe de análisis ha sido guardado como '{doc_path}' en '{file_path}'")
